@@ -6,7 +6,7 @@ import socket
 import urllib.parse
 from pathlib import Path
 import mimetypes
-from datetime import datetime
+from datetime import datetime, timedelta
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 
@@ -19,6 +19,7 @@ SOCKER_PORT = 5000
 
 MESSAGES = {}
 STORAGE_PATH = Path('storage')
+DELTA_TIME_ZONE = 2
 
 
 class GoItFramework(BaseHTTPRequestHandler):
@@ -75,7 +76,7 @@ def save_data_from_form(data):
     try:
         parse_dict = {key: value for key, value in [el.split('=') for el in parse_data.split('&')]}
         with open('storage/data.json', 'w', encoding='utf-8') as file:
-            MESSAGES.update({str(datetime.now()): parse_dict})
+            MESSAGES.update({str(datetime.now()+timedelta(hours=DELTA_TIME_ZONE)): parse_dict})
             json.dump(MESSAGES, file, ensure_ascii=False, indent=4)
             file.write('\n')
     except ValueError as error:
