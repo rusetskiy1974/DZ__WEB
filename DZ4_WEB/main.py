@@ -19,7 +19,7 @@ SOCKER_PORT = 5000
 
 MESSAGES = {}
 STORAGE_PATH = Path('storage')
-DELTA_TIME_ZONE = 2
+DELTA_TIME_ZONE = 0
 
 
 class GoItFramework(BaseHTTPRequestHandler):
