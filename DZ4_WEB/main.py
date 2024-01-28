@@ -26,7 +26,8 @@ class GoItFramework(BaseHTTPRequestHandler):
 
     def do_GET(self):
         route = urllib.parse.urlparse(self.path)
-        print(route.query)
+
+        print(route)
         match route.path:
             case '/':
                 self.send_html('index.html')
@@ -44,7 +45,7 @@ class GoItFramework(BaseHTTPRequestHandler):
         data = self.rfile.read(int(size))
 
         client_socker = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        client_socker.sendto(data,(SOCKER_HOST, SOCKER_PORT))
+        client_socker.sendto(data, (SOCKER_HOST, SOCKER_PORT))
         client_socker.close()
 
         self.send_response(302)
@@ -119,7 +120,7 @@ if __name__ == '__main__':
         with open(STORAGE_PATH / 'data.json', 'r') as file:
             MESSAGES = json.load(file)
     except OSError as err:
-        logging.info(err)
+        # logging.info(err)
         STORAGE_PATH.mkdir(exist_ok=True, parents=True)
 
     server = Thread(target=run_http_server, args=(HTTP_HOST, HTTP_PORT))
