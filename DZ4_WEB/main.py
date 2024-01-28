@@ -26,8 +26,6 @@ class GoItFramework(BaseHTTPRequestHandler):
 
     def do_GET(self):
         route = urllib.parse.urlparse(self.path)
-
-        print(route)
         match route.path:
             case '/':
                 self.send_html('index.html')
