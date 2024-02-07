@@ -16,7 +16,7 @@ async def send(executor, ws):
 
 async def listen(ws):
     async for message in ws:
-        logging.info(f"Message: {message}")
+        logging.info(message)
 
 
 async def start_client(hostname, port):

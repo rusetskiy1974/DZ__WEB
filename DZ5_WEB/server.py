@@ -41,12 +41,14 @@ class Server:
             if message.lower().split()[0] == 'exchange':
                 async with async_open("log.txt", 'a') as afp:
                     await afp.write(f'Called command exchange {datetime.now()}\n')
-                # logging.info(f'Called command exchange {datetime.now()}')
                 await ws.send(f"<<< Wait")
                 try:
                     day = int(parse_command(message.lower().split()))
-                    answer = await asyncio.create_task(main(day))
-                    await self.display(ws, answer)
+                    if day in range(10):
+                        answer = await asyncio.create_task(main(day))
+                        await self.display(ws, answer)
+                    else:
+                        raise ValueError
 
                 except (ValueError, TypeError, IndexError):
                     await ws.send(f"<<< Incorrect value, days may be in range 1 - 10")
