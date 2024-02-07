@@ -32,4 +32,4 @@ async def start_client(hostname, port):
 
 
 if __name__ == '__main__':
-    asyncio.run(start_client('localhost', 8765))
+    asyncio.run(start_client('localhost', 8080))
