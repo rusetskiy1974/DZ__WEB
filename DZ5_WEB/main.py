@@ -9,7 +9,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 DATE_FORMAT = '%d.%m.%Y'
 CURRENCY_RATE_SEARCH = ()
-logging.basicConfig(format="%(levelname)s: %(message)s", level=logging.INFO)
+logging.basicConfig(format="%(message)s", level=logging.INFO)
 
 
 class HttpError(Exception):
@@ -52,7 +52,6 @@ def parse_command(args: list):
                 days = (args[index])
             if index > 1:
                 CURRENCY_RATE_SEARCH += (args[index].strip(',').upper(),)
-
     return days
 
 
@@ -83,7 +82,5 @@ if __name__ == '__main__':
         days_ = int(parse_command(sys.argv))
         if days_ in range(10):
             logging.info(f"{asyncio.run(main(days_))}")
-    except (ValueError,TypeError, IndexError):
+    except (ValueError, TypeError, IndexError):
         logging.info(f'Incorrect value, days may be in range 1 - 10')
-
-

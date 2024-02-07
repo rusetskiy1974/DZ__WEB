@@ -10,6 +10,7 @@ from main import main, parse_command
 
 logging.basicConfig(level=logging.INFO)
 
+
 class Server:
     clients = set()
 
